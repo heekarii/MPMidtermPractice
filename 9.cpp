@@ -1,0 +1,32 @@
+#include<opencv2/opencv.hpp>
+
+int main() {
+	IplImage *src = cvLoadImage("c:\\temp\\lena.jpg");
+	IplImage *dst = cvCreateImage(cvGetSize(src), 8, 3);
+
+	for (int y = 0; y < src->height; y++) 
+		for (int x = 0; x < src->width; x++) {
+			CvScalar f = cvGet2D(src, y, x);
+		
+			float dy = (float)y / (dst->height - 1);
+			float dx = (float)x / (dst->width - 1);
+
+			CvScalar grey = {
+				(f.val[0] + f.val[1] + f.val[2]) / 3,
+				(f.val[0] + f.val[1] + f.val[2]) / 3,
+				(f.val[0] + f.val[1] + f.val[2]) / 3
+			};
+
+			CvScalar g;
+			for (int i = 0; i < 3; i++)
+				g.val[i] = (1 - dx) * f.val[i] + dx * grey.val[i];
+
+			cvSet2D(dst, y, x, g);
+		}
+
+	//cvShowImage("src", src);
+	cvShowImage("dst", dst);
+	cvWaitKey();
+
+	return 0;
+}
