@@ -10,16 +10,17 @@ int main() {
 			CvScalar g = cvScalar(0, 0, 0);
 
 
-			float dx = 2 * (float)x / (dst->width - 1) - 1;
-			float dy = 2 * (float)y / (dst->height - 1) - 1;
+			float dx = 2 * (float)x / (src->width - 1) - 1;
+			float dy = 2 * (float)y / (src->height - 1) - 1;
 
-			if (dx <= 0 && dy >= 0)
+			// BGR
+			if (dx <= 0 && dy <= 0)
 				g.val[2] = f.val[2];
-			else if (dx <= 0 && dy <= 0)
+			else if (dx <= 0 && dy >= 0)
 				g.val[0] = f.val[0];
-			else if (dx > 0 && dy > 0)
+			else if (dx > 0 && dy < 0)
 				g.val[1] = f.val[1];
-			else {
+			else if(dx > 0 && dy > 0) {
 				for (int i = 0; i < 3; i++) {
 					g.val[i] = (f.val[0] + f.val[1] + f.val[2]) / 3;
 				}
