@@ -19,7 +19,7 @@ int main() {
             float dx = 2 * (float)x / (src->width - 1) - 1;
             float dy = 2 * (float)y / (src->height - 1) - 1;
 
-            float shifted = dx + amp * sin(freq * CV_PI * dy);
+            float shifted = dy + amp * sin(freq * CV_PI * dx);
 
             if (shifted + 1.0f < 0) shifted -= 1.0f;
 
