@@ -34,7 +34,7 @@ int main() {
             if (x2 / a + y2 / b < L)
                 cvSet2D(dst, y, x, f);
             else
-                cvSet2D(dst, y, x, g);                       
+                cvSet2D(dst, y, x, g);
         }
     }
 
